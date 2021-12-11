@@ -2,7 +2,8 @@ const Usuario = require('../models/usuario.model');
 
 module.exports = {
     index(req, res){
-        res.json({message: 'Hello World'});
+        const user = Usuario.find();
+        res.json(user);
     },
     create(req, res){
         const {nome_usuario, email_usuario, tipo_usuario, senha_usuario} = req.body;
@@ -23,5 +24,16 @@ module.exports = {
         }).catch((err) => {
             return res.status(500).json(err);
         });
+    },
+    details(req, res){
+        
+        const {_id} = req.params;
+        console.log(req.params)
+        Usuario.findOne({_id}).lean().then((user) => {
+            res.json(user);
+        }).catch((err) =>{
+            res.json({message: 'Id não encontrado'});
+        });
+        
     }
 }
