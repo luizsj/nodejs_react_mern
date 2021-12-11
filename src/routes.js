@@ -9,7 +9,8 @@ routes.get('/', (req, res) => {
 
 //Rotas e Usuários
 routes.post('/api/usuarios', Usuario.create);
-routes.get('/api/usuarios', Usuario.index)
-routes.get('/api/usuario/:_id', Usuario.details)
+routes.get('/api/usuarios', Usuario.index);
+routes.get('/api/usuarios/:_id', Usuario.details);
+routes.delete('/api/usuarios/:_id', Usuario.delete);
 
 module.exports = routes;

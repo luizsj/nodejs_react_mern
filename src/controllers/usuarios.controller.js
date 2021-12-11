@@ -30,14 +30,23 @@ module.exports = {
         });
     },
     details(req, res){
-        
         const {_id} = req.params;
-        console.log(req.params)
         Usuario.findOne({_id}).lean().then((user) => {
             res.json(user);
         }).catch((err) =>{
             res.json({message: 'Id não encontrado'});
         });
-        
+    },
+    delete (req, res){
+        const {_id} = req.params;
+        Usuario.findById({_id}).then((user) => {
+            Usuario.deleteOne({_id}).then(() => {
+                res.json({message: 'Exclusão executada'});
+            }).catch((err) => {
+                res.json({message: 'Não foi possível excluir, erro interno!'});
+            })
+        }).catch((err) =>{
+            res.json({message: 'Id não encontrado'});
+        });
     }
 }
