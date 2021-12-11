@@ -2,8 +2,12 @@ const Usuario = require('../models/usuario.model');
 
 module.exports = {
     index(req, res){
-        const user = Usuario.find();
-        res.json(user);
+        const user = Usuario.find().then((user) => {
+            res.json(user);
+        }).catch((err) => {
+            res.json(err)
+        });
+        
     },
     create(req, res){
         const {nome_usuario, email_usuario, tipo_usuario, senha_usuario} = req.body;
