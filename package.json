@@ -10,10 +10,12 @@
   "author": "Luiz Soares",
   "license": "Beerware",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^6.1.1",
+    "node-pre-gyp": "^0.17.0",
     "path": "^0.12.7"
   },
   "devDependencies": {
