@@ -4,13 +4,16 @@
   "description": "Curso Mern Daniel Correa Youtube",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Luiz Soares",
   "license": "Beerware",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^6.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
