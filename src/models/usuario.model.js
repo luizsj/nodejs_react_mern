@@ -18,8 +18,7 @@ DataSchema.pre('save', function(next){
         bcrypt.genSalt(10, (erro, salt) => {
             bcrypt.hash(this.senha_usuario, salt, (erro, hash) => {
                 if (erro){
-                    req.flash("error_msg",  "Erro ao salvar o usuário")
-                    res.redirect("/")    
+                    res.json(erro)   ;
                 }else{
                     this.senha_usuario = hash
                     return next();
