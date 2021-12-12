@@ -21,8 +21,25 @@ DataSchema.pre('save', function(next){
                     req.flash("error_msg",  "Erro ao salvar o usuário")
                     res.redirect("/")    
                 }else{
-                    console.log(this.senha_usuario +'=' + hash)
                     this.senha_usuario = hash
+                    return next();
+                }
+            })
+        })
+    }
+});
+
+DataSchema.pre('findOneAndUpdate', function(next){
+    var password = this.getUpdate().senha_usuario + '';
+        
+    if (password.length < 55){
+        bcrypt.genSalt(10, (erro, salt) => {
+            bcrypt.hash(password, salt, (erro, hash) => {
+                if (erro){
+                    req.flash("error_msg",  "Erro ao salvar o usuário")
+                    res.redirect("/")    
+                }else{
+                    this.getUpdate().senha_usuario = hash
                     return next();
                 }
             })

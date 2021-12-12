@@ -1,4 +1,5 @@
 const Usuario = require('../models/usuario.model');
+const bcrypt = require("bcryptjs");
 
 module.exports = {
     index(req, res){
@@ -48,5 +49,16 @@ module.exports = {
         }).catch((err) =>{
             res.json({message: 'Id não encontrado'});
         });
+    },
+    update (req, res) {
+        const {_id, nome_usuario, email_usuario, tipo_usuario, senha_usuario} = req.body; 
+        let data = {nome_usuario, email_usuario, tipo_usuario, senha_usuario} ;
+            Usuario.findOneAndUpdate({_id}, data, {new:true}).then((user) => {
+                res.json(user);
+            }).catch((err) => {
+                console.log(err);
+                res.json(err);
+            });
     }
+
 }
