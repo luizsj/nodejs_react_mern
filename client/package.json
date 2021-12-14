@@ -3,18 +3,46 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.16.5",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@mui/icons-material": "^5.2.1",
+    "@mui/material": "^5.2.3",
+    "ansi-regex": "^6.0.1",
+    "immer": "^9.0.6",
+    "loader": "^2.1.1",
+    "nth-check": "^2.0.1",
     "react": "^17.0.2",
+    "react-dev-tools": "^0.0.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.1.1",
-    "react-scripts": "0.9.5"
+    "react-scripts": "^4.0.3",
+    "url-loader": "^4.1.1",
+    "webpack": "^4.44.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-stage-0": "^6.24.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
