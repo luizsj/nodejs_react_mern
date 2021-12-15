@@ -2,7 +2,7 @@ import React , {Component} from 'react';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Dashboard from './pages/admin/dashboard';
+import Dashboard from './pages/admin/dashboard/';
 
 //IMPORTS ADMIN
 import ProdutosListar from './pages/admin/produtos';
