@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
@@ -13,10 +14,35 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import Button from '@mui/material/Button';
+import api from '../../../services/api'
 const mdTheme = createTheme();
 
-function UsuariosCadastrar() {
+
+ function UsuariosCadastrar() {
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [tipo, setTipo] = useState('');
+
+  async  function handleSubmit(){
+    const data = {nome_usuario: nome,
+                email_usuario: email,
+                senha_usuario:senha,
+                tipo_usuario: tipo}
+    if (nome !== '' && email !== '' && senha !== '' && tipo !== ''){
+      const response = await api.post('/api/usuarios', data)
+      if (response.status === 200) {
+        window.location.href = '/admin/usuarios'
+      }else{
+        alert('Erro ao cadastrar o usuário')
+      }
+    }else{
+      alert('Necessário preencher todos os dados!')
+    }
+    
+
+  }
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -53,6 +79,8 @@ function UsuariosCadastrar() {
                           fullWidth
                           autoComplete="nome"
                           variant="standard"
+                          value= {nome}
+                          onChange={ e=> setNome(e.target.value)}
                         />
                       </Grid>
                       <Grid item xs={12} sm={6}>
@@ -64,17 +92,18 @@ function UsuariosCadastrar() {
                           fullWidth
                           autoComplete="email"
                           variant="standard"
+                          value= {email}
+                          onChange={ e=> setEmail(e.target.value)}
                         />
                       </Grid>
                       <Grid item xs={12} sm={3}>
-                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120, width:"100%" }}>
+                        <FormControl variant="standard" sx={{ m: 0, minWidth: 120, width:"100%" }}>
                           <InputLabel id="LabelTipo">Tipo</InputLabel>
                           <Select
                             labelId="LabelTipo"
                             id="tipo"
-                            //value={age}
-                            //onChange={handleChange}
-                            //label="Tipo"
+                            value= {tipo}
+                            onChange={ e=> setTipo(e.target.value)}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -94,7 +123,12 @@ function UsuariosCadastrar() {
                           fullWidth
                           autoComplete="senha"
                           variant="standard"
+                          value= {senha}
+                          onChange={ e=> setSenha(e.target.value)}
                         />
+                      </Grid>
+                      <Grid item xs={12} sm={12}>
+                        <Button variant="contained" onClick={handleSubmit}>Salvar</Button>
                       </Grid>
                     </Grid>
                   </Paper>
