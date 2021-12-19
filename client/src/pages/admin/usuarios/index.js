@@ -31,12 +31,21 @@ function UsuariosListar() {
   useEffect(() => {
     async function loadUsuarios(){
       const response = await api.get("/api/usuarios");
-      
       setUsuarios(response.data);
     }
     loadUsuarios();
   },[]);
-  console.log(usuarios);
+
+  async function handleDelete(id){
+    if (window.confirm('Excluir Este Usuário?')){
+      var result = await api.delete('/api/usuarios/'+id);
+      if (result.status === 200){
+        window.location.href = '/admin/usuarios';
+      }else{
+        alert('Ocorreu um erro! Tente Novamente');
+      }
+    }
+  }
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -90,7 +99,7 @@ function UsuariosListar() {
                                   <TableCell align="center">
                                     <ButtonGroup aria-label="outlined small button group">
                                       <Button color="primary">Atualizar</Button>
-                                      <Button color="secondary">Excluir</Button>
+                                      <Button color="secondary" onClick={()=> handleDelete(row._id)}>Excluir</Button>
                                     </ButtonGroup>
                               
                                   </TableCell>
