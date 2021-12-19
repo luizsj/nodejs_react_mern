@@ -20,6 +20,7 @@ routes.post('/api/produtos', Produto.create);
 routes.get('/api/produtos', Produto.index);
 routes.get('/api/produtos/:_id', Produto.details);
 routes.delete('/api/produtos/:_id', Produto.delete);
-routes.put('/api/produtos', Produto.update)
+routes.put('/api/produtos', Produto.update);
+routes.post('/api/usuarios/login', Usuario.login)
 
 module.exports = routes;

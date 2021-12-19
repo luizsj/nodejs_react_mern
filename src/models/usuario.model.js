@@ -43,6 +43,8 @@ DataSchema.pre('findOneAndUpdate', function(next){
                 }
             })
         })
+    }else{
+        return next();
     }
 });
 
