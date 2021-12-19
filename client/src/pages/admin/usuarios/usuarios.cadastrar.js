@@ -67,7 +67,6 @@ const mdTheme = createTheme();
                   <Paper  >
                     <Grid container spacing={1}  padding={3}>
                       <Grid item sm={12}>
-                          
                           <h2>Novo Usuário</h2>
                       </Grid>
                       <Grid item xs={12} sm={12}>
