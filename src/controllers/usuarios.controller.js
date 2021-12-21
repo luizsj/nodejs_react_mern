@@ -64,22 +64,27 @@ module.exports = {
     },
     login(req, res) {
         const {email, senha} = req.body;
-        console.log(email);
         console.log(senha);
         Usuario.findOne({email_usuario: email, tipo_usuario: 1}).then((user) => {
             if (!user){
                 res.status(200).json({status: 2, erro: ' Email nao encontrado'})
             }else{
-                const payload = {email};
-                const token = jwt.sign(payload, secret, {
-                    expiresIn: '24h'
-                });
-                res.cookie('token', token, {httpOnly: true});
-                res.status(200).json({status: 1, auth: true, token: token, id_client: user._id, user_name: user.nome_usuario});
+                user.isCorrectPassword(senha, async function (err, same){
+                    if( err){
+                        res.status(200).json({erro: 'Erro no Servidor!'})
+                    }else if(!same){
+                        res.status(200).json({status: 2, erro: 'Senha Incorreta!'});
+                    }else {
+                            const payload = {email};
+                            const token = jwt.sign(payload, secret, {
+                                expiresIn: '24h'
+                            });
+                            res.cookie('token', token, {httpOnly: true});
+                            res.status(200).json({status: 1, auth: true, token: token, id_client: user._id, user_name: user.nome_usuario});
+                    }
+                })
             }
-
         }).catch((err) => {
-            console.log(err);
             res.status(200).json({erro: ' Erro no servidor'});
         })
     }

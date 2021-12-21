@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import api from '../../../services/api';
+import {login, setIdUsuario, setNomeUsuario } from '../../../services/auth';
 
 function Copyright(props) {
   return (
@@ -45,7 +47,23 @@ export default function SignIn() {
   const [senha, setSenha] = useState();
 
   async function handleSubmit(){
-      alert('autenticar '+email);
+      await api.post('/api/usuarios/login', {email, senha})
+      .then(res => {
+          if (res.status === 200){
+            if (res.data.status === 1){
+                login(res.data.token);
+                setIdUsuario(res.data.id_client);
+                setNomeUsuario(res.data.user_name);
+                window.location.href = "/admin";
+            }else if (res.data.status === 2){
+                alert(res.data.erro);
+            }
+          }else{
+              alert('Erro no servidor');
+          }
+
+      })
+      
   }
   return (
     <ThemeProvider theme={theme}>
@@ -96,11 +114,11 @@ export default function SignIn() {
               label="Remember me"
         /> */}
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-
+              onClick={handleSubmit}
             >
               Entrar
             </Button>
