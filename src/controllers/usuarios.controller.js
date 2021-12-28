@@ -37,7 +37,7 @@ module.exports = {
         Usuario.findOne({_id}).lean().then((user) => {
             res.json(user);
         }).catch((err) =>{
-            res.json({message: 'Id não encontrado'});
+            res.json({message: 'Id não encontrado para details'});
         });
     },
     delete (req, res){
@@ -49,7 +49,7 @@ module.exports = {
                 res.json({message: 'Não foi possível excluir, erro interno!'});
             })
         }).catch((err) =>{
-            res.json({message: 'Id não encontrado'});
+            res.json({message: 'Id não encontrado para delete'});
         });
     },
     update (req, res) {
@@ -87,6 +87,20 @@ module.exports = {
         }).catch((err) => {
             res.status(200).json({erro: ' Erro no servidor'});
         })
+    },
+    async checkToken(req, res) {
+        const token = req.body.token || req.query.token || req.cookies.token || req.headers['x-access-token'];
+        if (!token){
+            res.json({status: 401, msg: 'Não autorizado: token inexistente!'})
+        }else{
+            jwt.verify(token, secret, function(err, decoded){
+                if(err){
+                    res.json({status: 401, msg: 'Não autorizado: token inválido!'})
+                }else{
+                    res.json({status:200});
+                }
+            })
+        }
     }
 
 }

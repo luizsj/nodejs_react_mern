@@ -22,5 +22,6 @@ routes.get('/api/produtos/:_id', Produto.details);
 routes.delete('/api/produtos/:_id', Produto.delete);
 routes.put('/api/produtos', Produto.update);
 routes.post('/api/usuarios/login', Usuario.login)
+routes.get('/api/usuarios/checktoken', Usuario.checkToken)
 
 module.exports = routes;

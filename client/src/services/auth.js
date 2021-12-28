@@ -4,6 +4,7 @@ export const NOME_USUARIO = "&nome-usuario";
 export const USER_TYPE = "&user-type";
 
 export const login = token => {
+    console.log('token_key '+TOKEN_KEY);
     localStorage.setItem(TOKEN_KEY, token);
 }
 export const logout = () => { localStorage.clear() };
@@ -17,3 +18,4 @@ export const getNomeUsuario = () => localStorage.getItem(NOME_USUARIO);
 export const setTipoUsuario = tipo => localStorage.setItem(USER_TYPE, tipo);
 export const getTipoUsuario = () => localStorage.getItem(USER_TYPE);
 
+export const getToken = () => localStorage.getItem(TOKEN_KEY)

@@ -1,0 +1,22 @@
+autenticaçào conforme proposta nas video-aulas não consegui implementar
+porque as diferenças de versão dos pacotes não combina com a sintaxe e lógica dos vídeos
+
+
+Tentar adaptar a lógica do outro curso usando passport
+
+Lógica:
+1 - instalar o pacote e configurar para autenticar em banco local;
+2 - o arquivo de rotas chama a propriedade is_Admin. funcão helpers/is_Admin
+3 - o roteamento é feito passando o is_admin diretamente em router.get/.proposta
+4 - No curso atual o roteamento é feito em React <Router>
+        passando o Wauth no element
+5 - isso faz a chamada ao Wauth e dependendo do resultado dele
+        vai para página de login ou para a página solicitada
+
+
+
+Refazendo, tentar novamente corrigir  a sintaxe proposta
+
+
+
+

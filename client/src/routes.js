@@ -1,4 +1,4 @@
-import React , {Component} from 'react';
+import React , {Component, Fragment} from 'react';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -17,10 +17,13 @@ import Login from './pages/admin/login';
 import Home from './pages/client/home';
 import ProdutoDetails from './pages/client/produtos/produtos.details';
 
+import Wauth from './services/wAuth';
+
 export default class Routing extends Component {
     render(){
         return(
             <BrowserRouter>
+            <Fragment>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/produtos/:idProduto" element={<ProdutoDetails />} />
@@ -30,10 +33,11 @@ export default class Routing extends Component {
                     <Route path="/admin/produtos" element={<ProdutosListar />} />
                     <Route path="/admin/produtos/cadastrar" element={<ProdutoCadastrar />} />
                     <Route path="/admin/produtos/editar/:idProduto" element={<ProdutoEditar />} />
-                    <Route path="/admin/usuarios" element={<UsuariosListar />} />
+                    <Wauth path="/admin/usuarios" element={...<UsuariosListar/>}  />
                     <Route path="/admin/usuarios/cadastrar" element={<UsuarioCadastrar />} />
                     <Route path="/admin/usuarios/editar/:idUsuario" element={<UsuarioEditar />} />
                 </Routes>
+            </Fragment>
             </BrowserRouter>
         );
     }
